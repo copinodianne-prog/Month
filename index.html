@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Little Love Story ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7, #f8cdda);
+    min-height: 100vh;
+    color: #8b2942;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,0.92);
+    max-width: 750px;
+    width: 100%;
+    padding: 40px 25px;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(120,30,60,0.2);
+    animation: appear 1.5s ease;
+}
+
+h1 {
+    font-size: 34px;
+    margin: 15px 0;
+}
+
+h2 {
+    color: #d6336c;
+    margin-bottom: 20px;
+}
+
+.heart {
+    font-size: 65px;
+    animation: heartbeat 1.2s infinite;
+    margin: 20px;
+}
+
+.subtitle {
+    line-height: 1.8;
+    margin: 15px 0;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: #fff0f3;
+    padding: 15px 12px;
+    border-radius: 12px;
+    min-width: 75px;
+    border: 1px solid #f5c3d0;
+}
+
+.time-box span {
+    display: block;
+    font-size: 27px;
+    font-weight: bold;
+    color: #d6336c;
+}
+
+.time-box small {
+    font-size: 11px;
+}
+
+button {
+    background: #e75480;
+    color: white;
+    border: none;
+    padding: 15px 28px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+button:hover:not(:disabled) {
+    background: #c92f65;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background: #c9a5ae;
+    cursor: not-allowed;
+}
+
+#lockedMessage {
+    background: #fff0f3;
+    padding: 18px;
+    border-radius: 15px;
+    line-height: 1.8;
+    margin: 20px 0;
+}
+
+#surprise {
+    display: none;
+    margin-top: 35px;
+    animation: appear 1.5s ease;
+}
+
+.love-note {
+    background: #fff0f3;
+    padding: 25px;
+    border-radius: 15px;
+    line-height: 2;
+    text-align: left;
+    white-space: pre-line;
+    margin-bottom: 35px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.gallery img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    transition: 0.4s;
+}
+
+.gallery img:hover {
+    transform: scale(1.04) rotate(-2deg);
+}
+
+.photo-caption {
+    font-size: 14px;
+    margin: 15px 0 30px;
+    font-style: italic;
+}
+
+.date {
+    font-size: 14px;
+    line-height: 2;
+    margin-top: 25px;
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+    animation: floatUp 7s linear forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@media(max-width:500px) {
+    h1 { font-size: 27px; }
+
+    .gallery img {
+        height: 160px;
+    }
+
+    .card {
+        padding: 30px 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="card">
+
+    <p>To my favorite person in the world...</p>
+
+    <div class="heart">❤️</div>
+
+    <h1>Our Little Love Story</h1>
+
+    <p class="subtitle">
+        Some surprises are worth waiting for.
+        And this one is especially made for you.
+    </p>
+
+    <h2>Our 3rd Monthsary 💗</h2>
+
+    <p>November 20, 2026 • 12:00 AM</p>
+
+    <!-- COUNTDOWN -->
+
+    <div id="countdown">
+
+        <div class="time-box">
+            <span id="days">00</span>
+            <small>DAYS</small>
+        </div>
+
+        <div class="time-box">
+            <span id="hours">00</span>
+            <small>HOURS</small>
+        </div>
+
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <small>MINUTES</small>
+        </div>
+
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <small>SECONDS</small>
+        </div>
+
+    </div>
+
+    <div id="lockedMessage">
+        🔒 Your surprise is still waiting...
+
+        <br>
+
+        Come back when the clock strikes 12.
+
+        <br>
+
+        I promise, it's worth the wait. ❤️
+    </div>
+
+    <!-- SURPRISE BUTTON -->
+
+    <button id="openButton" onclick="openSurprise()" disabled>
+        🔒 Surprise Locked
+    </button>
+
+    <!-- BACKGROUND MUSIC -->
+
+    <audio id="bgMusic" loop>
+        <source src="music/love-song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- HIDDEN SURPRISE -->
+
+    <div id="surprise">
+
+        <div class="heart">💖</div>
+
+        <h2>Happy 3rd Monthsary, My Love!</h2>
+
+        <p class="subtitle">
+            Finally, your surprise is here.
+            This little corner of the internet belongs to us.
+        </p>
+
+        <h2>Our Memories Together 📸</h2>
+
+        <div class="gallery">
+
+            <img src="photos/photo1.jpg"
+                 alt="Our first memory">
+
+            <img src="photos/photo2.jpg"
+                 alt="Our first picture together">
+
+            <img src="photos/photo3.jpg"
+                 alt="Our first hangout together">
+
+            <img src="photos/photo4.jpg"
+                 alt="Our pictorial for our graduation">
+            
+            <img src="photos/photo5.jpg"
+                 alt="Our oath taking">
+
+            <img src="photos/photo6.jpg"
+                 alt="Our special moment">
+            
+            <img src="photos/photo7.jpg"
+                 alt="The day we become official">
+
+            <img src="photos/photo8.jpg"
+                 alt="Our special moment">
+
+        </div>
+
+        <p class="photo-caption">
+            Every picture holds a memory,
+            and every memory reminds me how lucky I am to have you.
+        </p>
+
+        <h2>A Letter Just For You 💌</h2>
+
+        <div class="love-note">
+
+My Love,
+
+**Hi, my love.**
+
+First, I want you to know that this will not be my last message or letter to you. I decided to write this now because I don't know when I'll have the chance to do something like this again. 
+
+I want to make an effort while I still have the time, because I might get busy in the coming days, and I don't want to miss the opportunity to tell you everything that's in my heart.
+
+I don't know what the coming days will bring or what things might change, but one thing I want you to always remember is that no matter how far I go or wherever life takes me, 
+
+my heart will always belong to you. I have already left a piece of my heart with you, and no distance, no matter how great, will ever change that. You are the person I want to come home to, 
+
+the person I want to share my stories with, and the person I want to spend my life with. No matter where I go, you will always be the one I will find my way back to.
+
+Six months may not seem like forever, but when I think about it, it feels incredibly long. The thought of not being able to see you, talk to you whenever I want, hold your hand, or simply 
+
+be beside you is something I am still trying to prepare myself for. Honestly, even thinking about it makes my heart heavy. There will be days when I will miss you more than words can explain, 
+
+days when all I will want is to be with you, and moments when I wish I could just come home and find you waiting for me.
+
+
+But I know I have to be strong, and we have to be strong together. I know we can get through this because we have already overcome so much. We have been through misunderstandings, 
+
+difficult moments, and challenges that could have easily made us give up on each other. We started from the bottom, learning, growing, and figuring things out along the way. 
+
+Yet, despite everything, we continued choosing each other. We chose to understand, to forgive, to fix what needed fixing, and to stay even when things weren't always easy.
+
+And look at us now. Next year, we will be celebrating our fourth year together. Four years of love, memories, lessons, and countless moments that have made us who we are today. 
+
+I am so proud of how far we have come, and I hope you know how much I treasure everything we have built together.
+
+
+I hope you will wait for me, my love. I promise that you are the person I will come back to. I trust you, and I trust the love we have for each other. I hope that even on the 
+
+days when distance becomes difficult, we will never allow it to make us forget why we started. Please remember that being far away doesn't mean I am choosing to be distant from you. 
+
+It simply means I have to be somewhere else for a while, but my heart will remain with you.
+
+
+This will be the beginning of a different chapter in our relationship, one where we will have to learn how to love each other from a distance. There will be longing, sleepless nights, 
+
+missed conversations, and moments when all we can do is wish we were together. I will miss your presence, your smile, your hugs, your laughter, and even the simplest things we usually 
+
+do without realizing how precious they are. I will miss the comfort of knowing that you're just one call or a few steps away.
+
+If only I could slow down time, I would. I would hold on to every second we have left before that day comes. I would spend every possible moment with you, make more memories, 
+
+hug you a little longer, kiss you a little more, and remind you every single day how much you mean to me. I don't want to take any moment with you for granted because I know 
+
+there will come a time when all I can do is look back at those memories and wish I could experience them all over again.
+
+But my love, I don't want you to see these six months as something that will separate us. I want us to see them as something we can overcome together. Let this be another chapter 
+
+in our story, another challenge that will remind us that love is not only about being together physically. It is also about patience, trust, understanding, and choosing each other 
+
+even when it is difficult.
+
+
+I cannot promise that every day will be easy. I cannot promise that I won't feel lonely or that I won't miss you terribly. There might be days when I become too busy, too tired, 
+or unable to give you the 
+
+attention you deserve. But I hope you will never mistake my silence for a lack of love. Even on my busiest days, I will always carry you in my thoughts. I will always find ways to remind you that you are 
+
+loved, missed, and never forgotten.
+
+
+Please take care of yourself while I'm away. Don't forget to eat on time, get enough rest, and look after yourself. I may not always be physically there to remind you, but I hope you will remember that 
+
+someone, somewhere, loves you more than you could ever imagine and wishes nothing but the best for you.
+
+And when the time finally comes for me to return, I hope we can look back at these six months and smile, knowing that we made it. That despite the distance, the longing, and all the difficult days,
+
+we never gave up on what we have. I want that day to come when I can finally see you again, hold you in my arms, and tell you that I am home.
+
+Until then, please keep a place for me in your heart, just as I will always keep a place for you in mine.
+
+I may be going somewhere far away, but I am not leaving you behind. I am carrying our love with me. And wherever I go, whatever happens, and however difficult the days become, you will always be the person I choose.
+
+**No words will ever be enough to explain how much I love you. I hope that even when distance keeps us apart, you will always feel that love. Six months is only a chapter, my love. It is not the end of our story.**
+
+Wait for me, okay? I'll do my best to make you proud, and I'll come back to you.
+
+**I love you, always and in all ways.** ❤️
+
+        </div>
+
+        <h2>Here's to More Months and Memories! 🥂</h2>
+
+        <p class="date">
+            August 20, 2026
+            <br>
+            The beginning of us.
+
+            <br><br>
+
+            November 20, 2026
+            <br>
+            Our 3rd Monthsary.
+
+            <br><br>
+
+            Forever yours. ❤️
+        </p>
+
+    </div>
+
+</div>
+</div>
+
+<script>
+
+// NOVEMBER 20, 2026 AT 12:00 AM
+// Philippine Time (UTC+8)
+
+const targetDate = new Date(
+    "2026-11-20T00:00:00+08:00"
+).getTime();
+
+let surpriseOpened = false;
+
+function updateCountdown() {
+
+    const now = Date.now();
+    const distance = targetDate - now;
+
+    if (distance <= 0) {
+
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+
+        document.getElementById("lockedMessage").innerHTML =
+            "💗 The moment we've been waiting for is finally here!";
+
+        const button = document.getElementById("openButton");
+
+        button.disabled = false;
+        button.innerHTML = "💖 Open My Surprise 💖";
+
+        return;
+    }
+
+    const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (distance % (1000 * 60)) / 1000
+    );
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+
+}
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+
+// OPEN SURPRISE + AUTOMATIC MUSIC
+
+function openSurprise() {
+
+    // Security check: do not open before target time
+    if (Date.now() < targetDate) {
+        return;
+    }
+
+    if (surpriseOpened) return;
+
+    const music = document.getElementById("bgMusic");
+
+    music.play().then(() => {
+
+        surpriseOpened = true;
+
+        document.getElementById("openButton").style.display = "none";
+        document.getElementById("lockedMessage").style.display = "none";
+
+        document.getElementById("surprise").style.display = "block";
+
+        createHearts();
+
+        document.getElementById("surprise").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }).catch(() => {
+
+        alert("Please check your music file and try again.");
+
+    });
+
+}
+
+
+// FLOATING HEARTS
+
+function createHearts() {
+
+    setInterval(() => {
+
+        const heart = document.createElement("div");
+
+        heart.className = "floating-heart";
+
+        const hearts = ["❤️", "💕", "💗", "💖", "💘"];
+
+        heart.innerHTML =
+            hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left = Math.random() * 100 + "vw";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 25) + "px";
+
+        heart.style.animationDuration =
+            (4 + Math.random() * 4) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 8000);
+
+    }, 500);
+
+}
+
+</script>
+
+</body>
+</html>
+
