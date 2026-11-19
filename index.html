@@ -510,39 +510,43 @@ setInterval(updateCountdown, 1000);
 
 // OPEN SURPRISE + AUTOMATIC MUSIC
 
+
 function openSurprise() {
 
-    // Security check: do not open before target time
-    if (Date.now() < targetDate) {
+    const now = Date.now();
+
+    // Check if the monthsary date has arrived
+    if (now < targetDate) {
+        alert("Your surprise is not yet unlocked! ❤️");
         return;
     }
 
     if (surpriseOpened) return;
 
+    // Open the surprise FIRST, regardless of music
+    surpriseOpened = true;
+
+    document.getElementById("openButton").style.display = "none";
+
+    document.getElementById("lockedMessage").style.display = "none";
+
+    document.getElementById("surprise").style.display = "block";
+
+    // Show floating hearts
+    createHearts();
+
+    // Automatically attempt to play music
     const music = document.getElementById("bgMusic");
 
-    music.play().then(() => {
-
-        surpriseOpened = true;
-
-        document.getElementById("openButton").style.display = "none";
-        document.getElementById("lockedMessage").style.display = "none";
-
-        document.getElementById("surprise").style.display = "block";
-
-        createHearts();
-
-        document.getElementById("surprise").scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    }).catch(() => {
-
-        alert("Please check your music file and try again.");
-
+    music.play().catch(error => {
+        console.log("Music could not autoplay:", error);
     });
 
+    // Scroll to the surprise
+    document.getElementById("surprise").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 
