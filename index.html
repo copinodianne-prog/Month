@@ -446,37 +446,60 @@ Wait for me, okay? I'll do my best to make you proud, and I'll come back to you.
 
 <script>
 
-// NOVEMBER 20, 2026 AT 12:00 AM
+
+// MONTHSARY DATE: NOVEMBER 20, 2026, 12:00 AM
 // Philippine Time (UTC+8)
 
 const targetDate = new Date(
     "2026-11-20T00:00:00+08:00"
 ).getTime();
 
-let surpriseOpened = false;
+let heartsStarted = false;
 
+// PERMANENT UNLOCK CHECK
+function isUnlocked() {
+
+    const alreadyUnlocked =
+        localStorage.getItem("monthsaryUnlocked") === "true";
+
+    const dateHasArrived = Date.now() >= targetDate;
+
+    if (dateHasArrived && !alreadyUnlocked) {
+        localStorage.setItem("monthsaryUnlocked", "true");
+    }
+
+    return alreadyUnlocked || dateHasArrived;
+}
+
+
+// UPDATE COUNTDOWN AND BUTTON
 function updateCountdown() {
 
-    const now = Date.now();
-    const distance = targetDate - now;
+    const distance = targetDate - Date.now();
 
-    if (distance <= 0) {
+    const button = document.getElementById("openButton");
+    const lockedMessage = document.getElementById("lockedMessage");
+    const countdown = document.getElementById("countdown");
+
+    if (isUnlocked()) {
 
         document.getElementById("days").innerText = "00";
         document.getElementById("hours").innerText = "00";
         document.getElementById("minutes").innerText = "00";
         document.getElementById("seconds").innerText = "00";
 
-        document.getElementById("lockedMessage").innerHTML =
-            "💗 The moment we've been waiting for is finally here!";
-
-        const button = document.getElementById("openButton");
+        lockedMessage.style.display = "none";
+        countdown.style.display = "none";
 
         button.disabled = false;
+        button.style.display = "inline-block";
         button.innerHTML = "💖 Open My Surprise 💖";
 
         return;
     }
+
+    button.disabled = true;
+    button.innerHTML = "🔒 Surprise Locked";
 
     const days = Math.floor(
         distance / (1000 * 60 * 60 * 24)
@@ -503,55 +526,56 @@ function updateCountdown() {
 
 }
 
-updateCountdown();
 
+// RUN COUNTDOWN
+updateCountdown();
 setInterval(updateCountdown, 1000);
 
 
-// OPEN SURPRISE + AUTOMATIC MUSIC
-
-
+// OPEN SURPRISE ANYTIME AFTER UNLOCKING
 function openSurprise() {
 
-    const now = Date.now();
-
-    // Check if the monthsary date has arrived
-    if (now < targetDate) {
+    if (!isUnlocked()) {
         alert("Your surprise is not yet unlocked! ❤️");
         return;
     }
 
-    if (surpriseOpened) return;
-
-    // Open the surprise FIRST, regardless of music
-    surpriseOpened = true;
-
-    document.getElementById("openButton").style.display = "none";
+    // Keep the surprise accessible every time
+    document.getElementById("surprise").style.display = "block";
 
     document.getElementById("lockedMessage").style.display = "none";
 
-    document.getElementById("surprise").style.display = "block";
+    document.getElementById("countdown").style.display = "none";
 
-    // Show floating hearts
-    createHearts();
+    // Change button text but DO NOT permanently hide it
+    const button = document.getElementById("openButton");
 
-    // Automatically attempt to play music
+    button.disabled = false;
+    button.innerHTML = "💗 Open My Surprise Again 💗";
+
+    // Play music when clicked
     const music = document.getElementById("bgMusic");
 
     music.play().catch(error => {
-        console.log("Music could not autoplay:", error);
+        console.log("Music playback issue:", error);
     });
 
-    // Scroll to the surprise
+    // Start floating hearts only once
+    if (!heartsStarted) {
+        heartsStarted = true;
+        createHearts();
+    }
+
+    // Scroll to love letter and photos
     document.getElementById("surprise").scrollIntoView({
         behavior: "smooth",
         block: "start"
     });
+
 }
 
 
 // FLOATING HEARTS
-
 function createHearts() {
 
     setInterval(() => {
@@ -582,7 +606,6 @@ function createHearts() {
     }, 500);
 
 }
-
 </script>
 
 </body>
